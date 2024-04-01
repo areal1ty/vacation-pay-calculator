@@ -2,6 +2,7 @@ package com.neoflex.vacation_pay_calculator.service;
 
 import com.neoflex.vacation_pay_calculator.dto.PayResponse;
 import lombok.Getter;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -12,6 +13,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 @Getter
+@Service
 public class Calculator implements CalculatorService{
     private static final int currentYear = 2024;
     private static final double AVERAGE_DAYS_IN_MONTH = 29.3;
@@ -49,11 +51,11 @@ public class Calculator implements CalculatorService{
     @Override
     public PayResponse calculateVacationPay(BigDecimal salary, int vacationDays) {
         BigDecimal averageEarningsPerDay = salary.divide(BigDecimal.valueOf(AVERAGE_DAYS_IN_MONTH), 2, RoundingMode.HALF_EVEN);
-        BigDecimal totalPayWithoutNDFL = averageEarningsPerDay.multiply(BigDecimal.valueOf(vacationDays));
-        BigDecimal amountNDFL = totalPayWithoutNDFL.multiply(BigDecimal.valueOf(NDFL)).setScale(0, RoundingMode.HALF_UP);
-        BigDecimal totalPay = totalPayWithoutNDFL.subtract(amountNDFL);
+        BigDecimal totalVacationPayWithoutNDFL = averageEarningsPerDay.multiply(BigDecimal.valueOf(vacationDays));
+        BigDecimal amountNDFL = totalVacationPayWithoutNDFL.multiply(BigDecimal.valueOf(NDFL)).setScale(0, RoundingMode.HALF_UP);
+        BigDecimal totalVacationPay = totalVacationPayWithoutNDFL.subtract(amountNDFL);
 
-        return new PayResponse("Total vacation pay with NDFL = ", totalPay);
+        return new PayResponse("Total vacation pay with NDFL = ", totalVacationPay);
     }
 
     public int calculatePaidDays(int vacationDays, LocalDate startDate) {

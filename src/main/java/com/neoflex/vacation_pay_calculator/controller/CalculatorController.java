@@ -1,7 +1,6 @@
 package com.neoflex.vacation_pay_calculator.controller;
 
 import com.neoflex.vacation_pay_calculator.dto.PayResponse;
-import com.neoflex.vacation_pay_calculator.service.Calculator;
 import com.neoflex.vacation_pay_calculator.service.CalculatorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
