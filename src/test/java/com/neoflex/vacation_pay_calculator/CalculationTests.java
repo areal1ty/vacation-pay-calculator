@@ -35,10 +35,10 @@ public class CalculationTests {
     @Test
     @DisplayName("Vacation pay calculation")
     void calculateVacationPay() {
-        LocalDate startDate = LocalDate.of(2024, 3, 31);
-        int paidVacationDays = calculator.calculatePaidDays(vacationDays, startDate);
-        BigDecimal vacationPay = calculator.calculateVacationPay(yearSalary, paidVacationDays).getVacationPay();
-        assertEquals(BigDecimal.valueOf(29692.60).stripTrailingZeros(), vacationPay.stripTrailingZeros());
+        assertEquals(BigDecimal.valueOf(29692.60).stripTrailingZeros(),
+                calculator.calculateVacationPay(yearSalary,
+                                calculator.calculatePaidDays(vacationDays, LocalDate.of(2024, 3, 31)))
+                        .getVacationPay().stripTrailingZeros());
     }
 
 }

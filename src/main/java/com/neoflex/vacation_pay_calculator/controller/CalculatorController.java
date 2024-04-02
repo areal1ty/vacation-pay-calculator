@@ -30,4 +30,4 @@ public class CalculatorController {
         }
         return payCalculatorService.calculateVacationPay(salary, days);
     }
-    }
+}
